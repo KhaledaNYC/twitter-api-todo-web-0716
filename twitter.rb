@@ -30,8 +30,14 @@ class TwitterApi
   end
 
   def homepage_timeline
-    client.home_timeline
+    client.home_timeline.each do |object|
+      puts object.text
+      
+    end
+    
   end
+
+
 end
 
 #Bonus:
