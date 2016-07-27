@@ -1,5 +1,6 @@
 require 'twitter'
 require 'yaml'
+require "pry"
 
 class TwitterApi
   attr_accessor :client
@@ -16,8 +17,7 @@ class TwitterApi
 
 
   def most_recent_friend
-    #find the twitter gem method that retrieves a user's friends and grab the most recent friend
-    puts @client.friends
+    client.friends.first
   end
 
   def find_user_for(username)
@@ -26,13 +26,12 @@ class TwitterApi
   end
 
   def find_followers_for(username)
-    #find the twitter gem method that returns the follows of a given user
+    client.followers(username).take(10)
   end
 
   def homepage_timeline
-    #find the twitter gem method that retreives the tweets from a user's timeline.
+    client.home_timeline
   end
-
 end
 
 #Bonus:
@@ -43,5 +42,5 @@ end
 tweet_client = TwitterApi.new
 puts tweet_client.most_recent_friend
 puts tweet_client.find_user_for("khaledanyc")
-# puts tweet_client.find_followers_for("USERNAME HERE")
-# puts tweet_client.homepage_timeline
+tweet_client.find_followers_for("khaledanyc")
+puts tweet_client.homepage_timeline
